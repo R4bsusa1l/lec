@@ -91,12 +91,12 @@ export const translations: Record<Locale, Messages> = {
     documentTitle: 'Winterthur Lokale Elektrizitätsgemeinschaften',
     brandKicker: 'Winterthur · Lokale Elektrizitätsgemeinschaften',
     brandTitle: 'Mein LEG-Check Winterthur',
-    proto: 'Prototyp · alle LEC-Zahlen sind fiktiv',
+    proto: 'Prototyp · alle LEG-Zahlen sind fiktiv',
     heroKicker: 'Stadtplan der Quartierstrom-Inseln',
     heroTitle: 'Klicken Sie auf ein Quartier, um dessen Energiegemeinschaft zu öffnen',
     heroBody:
-      'Sieben Winterthurer Stadtkreise beherbergen modellierte LECs im Stadtwerk-Netz. Die Umrisse folgen den offiziellen Stadtquartieren; Produzentenzahlen, Tarife und Stundenprofile sind erfunden, aber dimensioniert wie eine Schweizer LEG 2026 — lokaler Solarstrom zum LEC-Tarif, der Rest weiterhin aus dem Kraftwerksmix.',
-    chipMeta: '{producers} PV · {consumers} Verbraucher · {pct}% LEC',
+      'Sieben Winterthurer Stadtkreise beherbergen modellierte LEGs im Stadtwerk-Netz. Die Umrisse folgen den offiziellen Stadtquartieren; Produzentenzahlen, Tarife und Stundenprofile sind erfunden, aber dimensioniert wie eine Schweizer LEG 2026 — lokaler Solarstrom zum LEG-Tarif, der Rest weiterhin aus dem Kraftwerksmix.',
+    chipMeta: '{producers} PV · {consumers} Verbraucher · {pct}% LEG',
     langToggleAria: 'Sprache wählen',
     langDe: 'DE',
     langEn: 'EN',
@@ -108,9 +108,9 @@ export const translations: Record<Locale, Messages> = {
     consumers: 'Verbraucher',
     consumersUnit: 'Zähler',
     pvFleet: 'PV-Park',
-    lecCoverage: 'LEC-Deckung',
+    lecCoverage: 'LEG-Deckung',
     coverageUnit: 'des Jahresbedarfs',
-    lecTariff: 'LEC-Tarif {value} Rp/kWh',
+    lecTariff: 'LEG-Tarif {value} Rp/kWh',
     gridTariff: 'Netz {value} Rp/kWh',
     feedIn: 'Einspeisung {value} Rp/kWh',
     founded: 'Gegründet {value}',
@@ -120,15 +120,15 @@ export const translations: Record<Locale, Messages> = {
     hourlyTitleSummer: 'Typischer Werktag im Juli',
     hourlyTitleWinter: 'Typischer Werktag im Januar',
     hourlyNote:
-      'Türkis = zum LEC-Tarif verbraucht (lokaler Solarstrom). Cyan = Rest aus dem öffentlichen Netz / Kraftwerken.',
-    yearlyTitle: 'Jahresaufteilung · LEC vs. Kraftwerk',
+      'Türkis = zum LEG-Tarif verbraucht (lokaler Solarstrom). Cyan = Rest aus dem öffentlichen Netz / Kraftwerken.',
+    yearlyTitle: 'Jahresaufteilung · LEG vs. Kraftwerk',
     yearlyNote:
       'Monatlicher Gemeinschaftsverbrauch, lokal abgerechnet versus aus dem Netzmix bezogen.',
-    tooltipLec: 'LEC-Tarif',
+    tooltipLec: 'LEG-Tarif',
     tooltipPlant: 'Kraftwerk / Netz',
     joinCalculator: 'Beitrittsrechner',
     joinNote:
-      'Prüfen Sie, ob diese LEC noch freien Solarstrom für neue Verbraucher oder freie Nachfrage für neue Produzenten hat. Zahlen sind modelliert, nicht gemessen.',
+      'Prüfen Sie, ob diese LEG noch freien Solarstrom für neue Verbraucher oder freie Nachfrage für neue Produzenten hat. Zahlen sind modelliert, nicht gemessen.',
     roleAria: 'Ihre Rolle',
     roleConsumer: 'Ich bin Verbraucher',
     roleProducer: 'Ich bin Solarproduzent',
@@ -150,7 +150,7 @@ export const translations: Record<Locale, Messages> = {
     legendDemand: 'Gemeinschaftsnachfrage',
     yourOffer: 'Ihr Angebot',
     yourDemand: 'Ihre Nachfrage',
-    yourLecShare: 'Ihr LEC-Anteil',
+    yourLecShare: 'Ihr LEG-Anteil',
     stillFromPlants: 'Weiterhin aus Kraftwerken',
     takenUpLocally: 'Lokal abgenommen',
     spillToFeedIn: 'Überschuss zur Einspeisung',
@@ -159,22 +159,22 @@ export const translations: Record<Locale, Messages> = {
       consumerStrong: {
         headline: 'Lokales Angebot kann einen nützlichen Teil Ihres Bedarfs decken',
         detail: ({ coveragePct }) =>
-          `Etwa ${Math.round(coveragePct)}% Ihres Stroms würden zum LEC-Tarif abgerechnet. Der Rest kommt weiterhin aus dem öffentlichen Netz / Kraftwerken.`,
+          `Etwa ${Math.round(coveragePct)}% Ihres Stroms würden zum LEG-Tarif abgerechnet. Der Rest kommt weiterhin aus dem öffentlichen Netz / Kraftwerken.`,
       },
       consumerModerate: {
-        headline: 'Knappes Angebot — nur ein bescheidener LEC-Anteil für neue Verbraucher',
+        headline: 'Knappes Angebot — nur ein bescheidener LEG-Anteil für neue Verbraucher',
         detail: () =>
-          'Die Produzenten sind bereits ausgelastet. Sie würden weiterhin die meisten Kilowattstunden aus dem Netz beziehen. Ein kleinerer Haushalt oder ein winterlastiges Profil sähe noch weniger LEC-Deckung.',
+          'Die Produzenten sind bereits ausgelastet. Sie würden weiterhin die meisten Kilowattstunden aus dem Netz beziehen. Ein kleinerer Haushalt oder ein winterlastiges Profil sähe noch weniger LEG-Deckung.',
       },
       consumerWeak: {
         headline: 'Wenig Angebot — als Verbraucher lohnt sich der Beitritt kaum',
         detail: ({ producers, consumers }) =>
-          `Diese Gemeinschaft hat bereits ${producers} Solarproduzent${producers === 1 ? '' : 'en'} für ${consumers} Verbraucher. Zusätzliche Nachfrage würde grösstenteils mit Kraftwerksstrom gedeckt, sodass der LEC-Tarif kaum greift.`,
+          `Diese Gemeinschaft hat bereits ${producers} Solarproduzent${producers === 1 ? '' : 'en'} für ${consumers} Verbraucher. Zusätzliche Nachfrage würde grösstenteils mit Kraftwerksstrom gedeckt, sodass der LEG-Tarif kaum greift.`,
       },
       producerStrong: {
         headline: 'Nachfrage übersteigt das Angebot deutlich — Produzenten sind gefragt',
         detail: ({ offtakePct }) =>
-          `Ein hoher Anteil Ihres angebotenen Stroms (~${Math.round(offtakePct)}%) könnte innerhalb der LEC abgenommen werden statt zur günstigen Einspeisung. Nachbarn importieren tagsüber noch viel Kraftwerksstrom.`,
+          `Ein hoher Anteil Ihres angebotenen Stroms (~${Math.round(offtakePct)}%) könnte innerhalb der LEG abgenommen werden statt zur günstigen Einspeisung. Nachbarn importieren tagsüber noch viel Kraftwerksstrom.`,
       },
       producerModerate: {
         headline: 'Es gibt noch Platz für zusätzliche Solaranlagen',
@@ -184,7 +184,7 @@ export const translations: Record<Locale, Messages> = {
       producerWeak: {
         headline: 'Lokale Nachfrage ist bereits gesättigt',
         detail: () =>
-          'Der Grossteil Ihres Überschusses würde weiterhin zum Einspeisetarif ans Netz verkauft. Diese LEC braucht derzeit keinen weiteren Produzenten.',
+          'Der Grossteil Ihres Überschusses würde weiterhin zum Einspeisetarif ans Netz verkauft. Diese LEG braucht derzeit keinen weiteren Produzenten.',
       },
     },
     lecs: {
@@ -196,7 +196,7 @@ export const translations: Record<Locale, Messages> = {
       hegi: {
         founded: 'Januar 2026',
         description:
-          'Hallendächer entlang des Industriegebiets Grüze und neuer Wohnraum in Hegi geben dieser LEC eine der stärksten PV-Flotten der Stadt. Mittagsüberschüsse sind von April bis August üblich; Winterabende stützen sich weiterhin aufs Netz. Eine fiktive Genossenschaft, Quartierstrom Oberi, koordiniert die Zuteilung alle 15 Minuten.',
+          'Hallendächer entlang des Industriegebiets Grüze und neuer Wohnraum in Hegi geben dieser LEG eine der stärksten PV-Flotten der Stadt. Mittagsüberschüsse sind von April bis August üblich; Winterabende stützen sich weiterhin aufs Netz. Eine fiktive Genossenschaft, Quartierstrom Oberi, koordiniert die Zuteilung alle 15 Minuten.',
       },
       seen: {
         founded: 'Mai 2026',
@@ -206,17 +206,17 @@ export const translations: Record<Locale, Messages> = {
       toess: {
         founded: 'Februar 2026',
         description:
-          'Benannt nach der alten Spinnerei, liegt diese Gemeinschaft auf ehemaligen Industriedächern plus dem Wohngewebe Richtung Dättnau. Produktion und Nachfrage liegen über das Jahr ungewöhnlich nahe beieinander — der LEC-Tarif greift für einen grossen Teil des Tagesverbrauchs und lässt nur wenig Spielraum für zusätzliche Produzenten.',
+          'Benannt nach der alten Spinnerei, liegt diese Gemeinschaft auf ehemaligen Industriedächern plus dem Wohngewebe Richtung Dättnau. Produktion und Nachfrage liegen über das Jahr ungewöhnlich nahe beieinander — der LEG-Tarif greift für einen grossen Teil des Tagesverbrauchs und lässt nur wenig Spielraum für zusätzliche Produzenten.',
       },
       rosenberg: {
         founded: 'Juni 2026',
         description:
-          'Eine winzige Hanggemeinschaft: eine Bauernhofanlage an der Rosenbergstrasse und acht Nachbarhaushalte. Die Nachfrage übersteigt bereits den einzelnen Produzenten. Extra-Verbraucher sähen kaum LEC-Strom; ein zweites Dach würde den Grossteil seines Überschusses in der Gruppe verkaufen statt zur Einspeisung.',
+          'Eine winzige Hanggemeinschaft: eine Bauernhofanlage an der Rosenbergstrasse und acht Nachbarhaushalte. Die Nachfrage übersteigt bereits den einzelnen Produzenten. Extra-Verbraucher sähen kaum LEG-Strom; ein zweites Dach würde den Grossteil seines Überschusses in der Gruppe verkaufen statt zur Einspeisung.',
       },
       auen: {
         founded: 'April 2026',
         description:
-          'Dorfähnliche Strassen zwischen den Töss-Auen und den Rebbergen. Dachpotenzial ist anständig, aber nicht dicht, und mehrere Wärmepumpen-Sanierungen 2023–2025 haben den Winterbedarf erhöht. Die LEC deckt ein faires Frühlings–Herbst-Mittagsfenster und wenig von der Abendspitze.',
+          'Dorfähnliche Strassen zwischen den Töss-Auen und den Rebbergen. Dachpotenzial ist anständig, aber nicht dicht, und mehrere Wärmepumpen-Sanierungen 2023–2025 haben den Winterbedarf erhöht. Die LEG deckt ein faires Frühlings–Herbst-Mittagsfenster und wenig von der Abendspitze.',
       },
       gutschick: {
         founded: 'März 2026',
@@ -366,4 +366,8 @@ export const translations: Record<Locale, Messages> = {
 
 export function formatTemplate(template: string, values: Record<string, string | number>) {
   return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ''))
+}
+
+export function localizedCommunityName(name: string, locale: Locale) {
+  return locale === 'de' ? name.replace(/\bLEC\b/g, 'LEG') : name
 }

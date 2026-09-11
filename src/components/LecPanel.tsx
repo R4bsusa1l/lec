@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { coveragePct, type Lec, type Season } from '../data/lecs'
 import { useLanguage } from '../i18n/LanguageContext'
-import { formatTemplate } from '../i18n/translations'
+import { formatTemplate, localizedCommunityName } from '../i18n/translations'
 import { Calculator } from './Calculator'
 import { EnergyChart } from './EnergyChart'
 import { HexCoaster } from './HexCoaster'
@@ -12,7 +12,7 @@ type Props = {
 }
 
 export function LecPanel({ lec, onClose }: Props) {
-  const { t } = useLanguage()
+  const { locale, t } = useLanguage()
   const [season, setSeason] = useState<Season>('summer')
   const coverage = coveragePct(lec)
   const copy = t.lecs[lec.id]
@@ -41,7 +41,7 @@ export function LecPanel({ lec, onClose }: Props) {
                 transformer: lec.transformer,
               })}
             </p>
-            <h2 id="lec-title">{lec.name}</h2>
+            <h2 id="lec-title">{localizedCommunityName(lec.name, locale)}</h2>
             <p className="lede">{copy?.description}</p>
           </header>
         </HexCoaster>

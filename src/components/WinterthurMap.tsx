@@ -5,6 +5,8 @@ import type { Feature, FeatureCollection, Geometry } from 'geojson'
 import type { Layer, PathOptions, LeafletMouseEvent } from 'leaflet'
 import districts from '../data/districts.json'
 import { lecByDistrictId, lecs } from '../data/lecs'
+import { useLanguage } from '../i18n/LanguageContext'
+import { localizedCommunityName } from '../i18n/translations'
 
 type DistrictProps = {
   id: string
@@ -43,6 +45,7 @@ function labelIcon(name: string) {
 }
 
 export function WinterthurMap({ selectedId, onSelect }: Props) {
+  const { locale, t } = useLanguage()
   const icons = useMemo(
     () => Object.fromEntries(lecs.map((lec) => [lec.id, labelIcon(lec.shortName)])),
     [],
@@ -62,7 +65,7 @@ export function WinterthurMap({ selectedId, onSelect }: Props) {
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <GeoJSON
-        key={selectedId ?? 'none'}
+        key={`${selectedId ?? 'none'}-${locale}`}
         data={collection}
         style={(feature) => styleFor(feature as DistrictFeature, selectedId)}
         onEachFeature={(feature, layer: Layer) => {
@@ -84,8 +87,10 @@ export function WinterthurMap({ selectedId, onSelect }: Props) {
             },
           })
           const path = layer as unknown as { bindTooltip: (html: string, opts: object) => void }
+          const title = lec ? localizedCommunityName(lec.name, locale) : f.properties.name
+          const meta = lec ? `${lec.producers} ${t.producers} · ${lec.consumers} ${t.consumers}` : ''
           path.bindTooltip(
-            `<div class="map-tip"><strong>${lec?.name ?? f.properties.name}</strong><span>${lec ? `${lec.producers} producers · ${lec.consumers} consumers` : ''}</span></div>`,
+            `<div class="map-tip"><strong>${title}</strong><span>${meta}</span></div>`,
             { sticky: true, direction: 'top', opacity: 1, className: 'lec-tooltip' },
           )
         }}
