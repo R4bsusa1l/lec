@@ -32,9 +32,12 @@ export default function App() {
 
       <main>
         <HexCoaster variant="wide" className="hero-coaster">
-          <p className="kicker">{t.heroKicker}</p>
-          <h2>{t.heroTitle}</h2>
-          <p>{t.heroBody}</p>
+          <div className="hero-media" role="img" aria-label="Solardach in natürlicher Umgebung" />
+          <div className="hero-copy">
+            <p className="kicker">{t.heroKicker}</p>
+            <h2>{t.heroTitle}</h2>
+            <p>{t.heroBody}</p>
+          </div>
         </HexCoaster>
 
         <div className="stage">

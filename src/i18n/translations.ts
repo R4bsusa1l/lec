@@ -90,7 +90,7 @@ export const translations: Record<Locale, Messages> = {
   de: {
     documentTitle: 'Winterthur Lokale Elektrizitätsgemeinschaften',
     brandKicker: 'Winterthur · Lokale Elektrizitätsgemeinschaften',
-    brandTitle: 'Lokale Energiegemeinschaften',
+    brandTitle: 'Mein LEG-Check Winterthur',
     proto: 'Prototyp · alle LEC-Zahlen sind fiktiv',
     heroKicker: 'Stadtplan der Quartierstrom-Inseln',
     heroTitle: 'Klicken Sie auf ein Quartier, um dessen Energiegemeinschaft zu öffnen',
@@ -228,7 +228,7 @@ export const translations: Record<Locale, Messages> = {
   en: {
     documentTitle: 'Winterthur Local Energy Communities',
     brandKicker: 'Winterthur · Local Energy Communities',
-    brandTitle: 'Local Energy Communities',
+    brandTitle: 'Mein LEG-Check Winterthur',
     proto: 'Prototype · all LEC figures are fictional',
     heroKicker: 'City map of neighbourhood power islands',
     heroTitle: 'Click a district to open its energy community',
