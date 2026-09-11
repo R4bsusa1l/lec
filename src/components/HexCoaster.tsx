@@ -70,7 +70,7 @@ export function HexCoaster({ children, variant = 'wide', className = '', glow }:
     <div
       ref={boxRef}
       className={`hex-coaster hex-${variant} ${className}`}
-      style={{ '--hex-inset': `${gutter}px`, '--hex-glow': glow ?? 'rgba(255, 80, 110, 0.4)' } as CSSProperties}
+      style={{ '--hex-inset': `${gutter}px`, '--hex-glow': glow ?? 'rgba(45, 212, 191, 0.4)' } as CSSProperties}
     >
       <svg
         className="hex-plate"
@@ -80,14 +80,14 @@ export function HexCoaster({ children, variant = 'wide', className = '', glow }:
       >
         <defs>
           <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#ffb07a" />
-            <stop offset="50%" stopColor="#ff5c7a" />
-            <stop offset="100%" stopColor="#ff3d6e" />
+            <stop offset="0%" stopColor="#5eead4" />
+            <stop offset="50%" stopColor="#06b6d4" />
+            <stop offset="100%" stopColor="#0d9488" />
           </linearGradient>
         </defs>
         <polygon
           points={points}
-          fill="rgba(22, 6, 14, 0.9)"
+          fill="rgba(6, 22, 26, 0.9)"
           stroke={`url(#${gid})`}
           strokeWidth={tile ? 2.6 : 2.4}
           strokeLinejoin="miter"

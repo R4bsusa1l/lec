@@ -120,7 +120,7 @@ export const translations: Record<Locale, Messages> = {
     hourlyTitleSummer: 'Typischer Werktag im Juli',
     hourlyTitleWinter: 'Typischer Werktag im Januar',
     hourlyNote:
-      'Orange = zum LEC-Tarif verbraucht (lokaler Solarstrom). Pink = Rest aus dem öffentlichen Netz / Kraftwerken.',
+      'Türkis = zum LEC-Tarif verbraucht (lokaler Solarstrom). Cyan = Rest aus dem öffentlichen Netz / Kraftwerken.',
     yearlyTitle: 'Jahresaufteilung · LEC vs. Kraftwerk',
     yearlyNote:
       'Monatlicher Gemeinschaftsverbrauch, lokal abgerechnet versus aus dem Netzmix bezogen.',
@@ -258,7 +258,7 @@ export const translations: Record<Locale, Messages> = {
     hourlyTitleSummer: 'Typical July weekday',
     hourlyTitleWinter: 'Typical January weekday',
     hourlyNote:
-      'Orange = consumed at the LEC tariff (local solar). Pink = residual from the public grid / power plants.',
+      'Turquoise = consumed at the LEC tariff (local solar). Cyan = residual from the public grid / power plants.',
     yearlyTitle: 'Year split · LEC vs plant',
     yearlyNote: 'Monthly community consumption billed locally versus drawn from the grid mix.',
     tooltipLec: 'LEC tariff',

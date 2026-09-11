@@ -219,7 +219,7 @@ export const lecs: Lec[] = [
     lecTariffRp: 19.6,
     gridTariffRp: 29.4,
     feedInRp: 8.1,
-    color: '#ff7a45',
+    color: '#2dd4bf',
   },
   {
     id: 'hegi',
@@ -237,7 +237,7 @@ export const lecs: Lec[] = [
     lecTariffRp: 18.4,
     gridTariffRp: 29.4,
     feedInRp: 8.1,
-    color: '#ff9a4a',
+    color: '#5eead4',
   },
   {
     id: 'seen',
@@ -255,7 +255,7 @@ export const lecs: Lec[] = [
     lecTariffRp: 20.2,
     gridTariffRp: 29.4,
     feedInRp: 8.1,
-    color: '#ff5c7a',
+    color: '#22d3ee',
   },
   {
     id: 'toess',
@@ -273,7 +273,7 @@ export const lecs: Lec[] = [
     lecTariffRp: 18.9,
     gridTariffRp: 29.4,
     feedInRp: 8.1,
-    color: '#ff6b3c',
+    color: '#14b8a6',
   },
   {
     id: 'rosenberg',
@@ -291,7 +291,7 @@ export const lecs: Lec[] = [
     lecTariffRp: 20.8,
     gridTariffRp: 29.4,
     feedInRp: 8.1,
-    color: '#ff4d88',
+    color: '#06b6d4',
   },
   {
     id: 'auen',
@@ -309,7 +309,7 @@ export const lecs: Lec[] = [
     lecTariffRp: 19.9,
     gridTariffRp: 29.4,
     feedInRp: 8.1,
-    color: '#ff7a62',
+    color: '#2ec4b6',
   },
   {
     id: 'gutschick',
@@ -327,7 +327,7 @@ export const lecs: Lec[] = [
     lecTariffRp: 19.2,
     gridTariffRp: 29.4,
     feedInRp: 8.1,
-    color: '#ff5a55',
+    color: '#0d9488',
   },
 ]
 

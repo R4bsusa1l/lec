@@ -1,12 +1,12 @@
 :root {
-  --bg: #14060c;
-  --ink: #ffe8dc;
-  --muted: #d7a8b0;
-  --orange: #ff7a3c;
-  --pink: #ff4d88;
-  --hot: #ff2d6a;
-  --copper: #ffb08a;
-  --panel: rgba(28, 8, 16, 0.78);
+  --bg: #061418;
+  --ink: #e4faf6;
+  --muted: #8fb8b4;
+  --teal: #2dd4bf;
+  --aqua: #06b6d4;
+  --deep: #0d9488;
+  --mint: #99f6e4;
+  --panel: rgba(8, 28, 32, 0.78);
   --sans: 'IBM Plex Sans', 'Segoe UI', sans-serif;
   --display: 'Rajdhani', 'Segoe UI', sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
@@ -41,9 +41,9 @@ button, input {
   min-height: 100svh;
   padding: 1.25rem 1.5rem 3rem;
   background:
-    radial-gradient(1100px 640px at 8% -12%, rgba(255, 110, 48, 0.42), transparent 58%),
-    radial-gradient(900px 700px at 100% 108%, rgba(255, 40, 120, 0.38), transparent 52%),
-    radial-gradient(520px 360px at 70% 8%, rgba(255, 90, 140, 0.16), transparent 55%),
+    radial-gradient(1100px 640px at 8% -12%, rgba(45, 212, 191, 0.38), transparent 58%),
+    radial-gradient(900px 700px at 100% 108%, rgba(6, 182, 212, 0.34), transparent 52%),
+    radial-gradient(520px 360px at 70% 8%, rgba(34, 211, 238, 0.16), transparent 55%),
     var(--bg);
 }
 
@@ -84,8 +84,8 @@ button, input {
   width: 46px;
   height: 52px;
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  background: linear-gradient(160deg, #ffb07a, #ff4d88 58%, #ff2d6a);
-  box-shadow: 0 0 22px rgba(255, 80, 110, 0.55);
+  background: linear-gradient(160deg, #5eead4, #06b6d4 58%, #0d9488);
+  box-shadow: 0 0 22px rgba(45, 212, 191, 0.5);
 }
 
 .brand h1 {
@@ -98,7 +98,7 @@ button, input {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.72rem;
-  color: var(--copper);
+  color: var(--mint);
   font-family: var(--mono);
 }
 
@@ -106,9 +106,9 @@ button, input {
   margin: 0;
   font-size: 0.82rem;
   color: var(--muted);
-  border: 1px solid rgba(255, 110, 90, 0.35);
+  border: 1px solid rgba(45, 212, 191, 0.35);
   padding: 0.35rem 0.7rem;
-  background: rgba(20, 6, 12, 0.45);
+  background: rgba(6, 20, 24, 0.45);
 }
 
 .topbar-actions {
@@ -120,8 +120,8 @@ button, input {
 
 .lang-toggle {
   display: inline-flex;
-  border: 1px solid rgba(255, 122, 80, 0.45);
-  background: rgba(20, 6, 12, 0.55);
+  border: 1px solid rgba(45, 212, 191, 0.45);
+  background: rgba(6, 20, 24, 0.55);
   overflow: hidden;
 }
 
@@ -138,16 +138,16 @@ button, input {
 }
 
 .lang-toggle button + button {
-  border-left: 1px solid rgba(255, 122, 80, 0.35);
+  border-left: 1px solid rgba(45, 212, 191, 0.35);
 }
 
 .lang-toggle button.on {
-  background: linear-gradient(90deg, rgba(255, 122, 60, 0.9), rgba(255, 77, 136, 0.9));
-  color: #1a060c;
+  background: linear-gradient(90deg, rgba(45, 212, 191, 0.9), rgba(6, 182, 212, 0.9));
+  color: #061a1c;
 }
 
 .lang-toggle button:focus-visible {
-  outline: 2px solid var(--orange);
+  outline: 2px solid var(--teal);
   outline-offset: 2px;
 }
 
@@ -230,7 +230,7 @@ button, input {
 
 .hero-coaster p {
   margin: 0.35rem auto 0;
-  color: #f4d4d0;
+  color: #d5f0eb;
   max-width: 54ch;
   line-height: 1.45;
 }
@@ -263,11 +263,11 @@ button, input {
 }
 
 .winti-map .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(155deg) saturate(1.85) brightness(0.72) contrast(1.12);
+  filter: invert(1) hue-rotate(190deg) saturate(1.55) brightness(0.7) contrast(1.1);
 }
 
 .leaflet-container {
-  background: #1a0a10;
+  background: #071c22;
   font-family: var(--sans);
 }
 
@@ -282,8 +282,8 @@ button, input {
   height: 30px;
   padding: 0 0.7rem;
   clip-path: polygon(12% 0, 88% 0, 100% 50%, 88% 100%, 12% 100%, 0 50%);
-  background: linear-gradient(90deg, rgba(255, 122, 60, 0.92), rgba(255, 77, 136, 0.92));
-  color: #1a060c;
+  background: linear-gradient(90deg, rgba(45, 212, 191, 0.92), rgba(6, 182, 212, 0.92));
+  color: #061a1c;
   font-family: var(--display);
   font-weight: 700;
   font-size: 12px;
@@ -291,8 +291,8 @@ button, input {
 }
 
 .lec-tooltip {
-  background: rgba(20, 6, 12, 0.92) !important;
-  border: 1px solid rgba(255, 122, 80, 0.5) !important;
+  background: rgba(6, 22, 26, 0.92) !important;
+  border: 1px solid rgba(45, 212, 191, 0.5) !important;
   color: var(--ink) !important;
   border-radius: 8px !important;
 }
@@ -349,7 +349,7 @@ button, input {
 
 .lec-chip:hover .chip-name,
 .lec-chip:focus-visible .chip-name {
-  color: var(--copper);
+  color: var(--mint);
 }
 
 .lec-overlay {
@@ -401,7 +401,7 @@ button, input {
 
 .lede {
   margin: 0 auto;
-  color: #f4d4d0;
+  color: #d5f0eb;
   line-height: 1.45;
   max-width: 58ch;
 }
@@ -410,8 +410,8 @@ button, input {
   position: static;
   align-self: center;
   margin-bottom: 0.45rem;
-  border: 1px solid rgba(255, 122, 80, 0.45);
-  background: rgba(255, 80, 110, 0.12);
+  border: 1px solid rgba(45, 212, 191, 0.45);
+  background: rgba(20, 184, 166, 0.14);
   color: var(--ink);
   padding: 0.4rem 0.8rem;
   cursor: pointer;
@@ -438,7 +438,7 @@ button, input {
   font-family: var(--display);
   font-size: 2rem;
   line-height: 1.05;
-  background: linear-gradient(90deg, #ffd1a8, #ff4d88);
+  background: linear-gradient(90deg, #a5f3fc, #06b6d4);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -451,7 +451,7 @@ button, input {
   gap: 0.55rem 1rem;
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: var(--copper);
+  color: var(--mint);
   margin: 0 0 0.8rem;
 }
 
@@ -473,8 +473,8 @@ button, input {
 .season-toggle button,
 .role-toggle button,
 .chips button {
-  border: 1px solid rgba(255, 122, 80, 0.4);
-  background: rgba(20, 6, 12, 0.4);
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  background: rgba(6, 20, 24, 0.4);
   color: var(--ink);
   padding: 0.35rem 0.8rem;
   cursor: pointer;
@@ -483,8 +483,8 @@ button, input {
 .season-toggle button.on,
 .role-toggle button.on,
 .chips button.on {
-  background: linear-gradient(90deg, rgba(255, 122, 60, 0.85), rgba(255, 77, 136, 0.85));
-  color: #1a060c;
+  background: linear-gradient(90deg, rgba(45, 212, 191, 0.85), rgba(6, 182, 212, 0.85));
+  color: #061a1c;
 }
 
 .charts {
@@ -509,7 +509,7 @@ button, input {
 
 .chart-frame {
   background: rgba(10, 2, 6, 0.35);
-  border: 1px solid rgba(255, 120, 90, 0.2);
+  border: 1px solid rgba(45, 212, 191, 0.22);
 }
 
 .calc-section {
@@ -528,7 +528,7 @@ button, input {
   display: block;
   font-size: 0.85rem;
   margin-bottom: 0.35rem;
-  color: var(--copper);
+  color: var(--mint);
 }
 
 .input-row {
@@ -541,14 +541,14 @@ button, input {
 .input-row input[type='number'] {
   width: 100%;
   background: rgba(10, 2, 6, 0.5);
-  border: 1px solid rgba(255, 122, 80, 0.4);
+  border: 1px solid rgba(45, 212, 191, 0.4);
   color: var(--ink);
   padding: 0.35rem 0.45rem;
 }
 
 .input-row input[type='range'] {
   width: 100%;
-  accent-color: var(--orange);
+  accent-color: var(--teal);
 }
 
 .unit {
@@ -585,11 +585,11 @@ button, input {
 }
 
 .balance-fill.supply {
-  background: linear-gradient(90deg, #ff9a4a, #ff7a3c);
+  background: linear-gradient(90deg, #5eead4, #2dd4bf);
 }
 
 .balance-fill.demand {
-  background: linear-gradient(90deg, #ff4d88, #ff2d6a);
+  background: linear-gradient(90deg, #06b6d4, #0d9488);
 }
 
 .you-slice {
@@ -597,8 +597,8 @@ button, input {
   height: 100%;
   background: repeating-linear-gradient(
     -45deg,
-    rgba(255, 232, 220, 0.55),
-    rgba(255, 232, 220, 0.55) 4px,
+    rgba(228, 250, 246, 0.55),
+    rgba(228, 250, 246, 0.55) 4px,
     transparent 4px,
     transparent 8px
   );
@@ -622,28 +622,28 @@ button, input {
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
 
-.swatch.supply { background: #ff8a45; }
-.swatch.demand { background: #ff4d88; }
-.swatch.you { background: #ffe8dc; }
+.swatch.supply { background: #2ec4b6; }
+.swatch.demand { background: #06b6d4; }
+.swatch.you { background: #e4faf6; }
 
 .verdict {
   padding: 0.9rem 1rem 0.7rem;
-  border: 1px solid rgba(255, 122, 80, 0.35);
-  background: rgba(20, 6, 12, 0.55);
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  background: rgba(6, 20, 24, 0.55);
 }
 
 .verdict-strong {
-  border-color: rgba(255, 170, 80, 0.7);
-  box-shadow: 0 0 24px rgba(255, 140, 60, 0.18);
+  border-color: rgba(94, 234, 212, 0.7);
+  box-shadow: 0 0 24px rgba(45, 212, 191, 0.2);
 }
 
 .verdict-moderate {
-  border-color: rgba(255, 100, 130, 0.55);
+  border-color: rgba(6, 182, 212, 0.55);
 }
 
 .verdict-weak {
-  border-color: rgba(255, 50, 110, 0.7);
-  box-shadow: 0 0 24px rgba(255, 40, 100, 0.16);
+  border-color: rgba(13, 148, 136, 0.7);
+  box-shadow: 0 0 24px rgba(8, 145, 178, 0.18);
 }
 
 .verdict strong {
@@ -653,7 +653,7 @@ button, input {
 
 .verdict p {
   margin: 0.35rem 0 0.6rem;
-  color: #f4d4d0;
+  color: #d5f0eb;
   line-height: 1.4;
 }
 

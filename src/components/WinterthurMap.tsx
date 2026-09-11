@@ -25,9 +25,9 @@ function styleFor(feature: DistrictFeature, selectedId?: string): PathOptions {
   const lec = lecByDistrictId(feature.properties.id)
   const selected = selectedId === feature.properties.id
   return {
-    color: lec?.color ?? '#ff7a45',
+    color: lec?.color ?? '#2dd4bf',
     weight: selected ? 3.4 : 2.1,
-    fillColor: lec?.color ?? '#ff4d88',
+    fillColor: lec?.color ?? '#06b6d4',
     fillOpacity: selected ? 0.48 : 0.28,
     opacity: 0.95,
   }
