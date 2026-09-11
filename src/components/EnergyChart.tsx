@@ -11,6 +11,7 @@ import {
   YAxis,
 } from 'recharts'
 import { hourlyProfile, monthlyProfile, type Lec, type Season } from '../data/lecs'
+import { useLanguage } from '../i18n/LanguageContext'
 
 type Props = {
   lec: Lec
@@ -26,16 +27,22 @@ const tooltipStyle = {
 }
 
 export function EnergyChart({ lec, season }: Props) {
+  const { t } = useLanguage()
   const hourly = useMemo(() => hourlyProfile(lec, season), [lec, season])
-  const monthly = useMemo(() => monthlyProfile(lec), [lec])
+  const monthly = useMemo(
+    () =>
+      monthlyProfile(lec).map((row, i) => ({
+        ...row,
+        month: t.months[i],
+      })),
+    [lec, t.months],
+  )
 
   return (
     <div className="charts">
       <div className="chart-block">
-        <h3>Typical {season === 'summer' ? 'July' : 'January'} weekday</h3>
-        <p className="chart-note">
-          Orange = consumed at the LEC tariff (local solar). Pink = residual from the public grid / power plants.
-        </p>
+        <h3>{season === 'summer' ? t.hourlyTitleSummer : t.hourlyTitleWinter}</h3>
+        <p className="chart-note">{t.hourlyNote}</p>
         <div className="chart-frame">
           <ResponsiveContainer width="100%" height={240}>
             <AreaChart data={hourly} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
@@ -56,7 +63,7 @@ export function EnergyChart({ lec, season }: Props) {
                 contentStyle={tooltipStyle}
                 formatter={(value, name) => [
                   `${Number(value).toFixed(1)} kWh`,
-                  name === 'lecKwh' ? 'LEC tariff' : name === 'plantKwh' ? 'Power plant / grid' : String(name),
+                  name === 'lecKwh' ? t.tooltipLec : name === 'plantKwh' ? t.tooltipPlant : String(name),
                 ]}
               />
               <Area type="monotone" dataKey="lecKwh" stackId="1" stroke="#ff9a4a" fill="url(#lecFill)" />
@@ -66,8 +73,8 @@ export function EnergyChart({ lec, season }: Props) {
         </div>
       </div>
       <div className="chart-block">
-        <h3>Year split · LEC vs plant</h3>
-        <p className="chart-note">Monthly community consumption billed locally versus drawn from the grid mix.</p>
+        <h3>{t.yearlyTitle}</h3>
+        <p className="chart-note">{t.yearlyNote}</p>
         <div className="chart-frame">
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={monthly} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
@@ -78,7 +85,7 @@ export function EnergyChart({ lec, season }: Props) {
                 contentStyle={tooltipStyle}
                 formatter={(value, name) => [
                   `${Number(value).toFixed(1)} MWh`,
-                  name === 'lecMwh' ? 'LEC tariff' : 'Power plant / grid',
+                  name === 'lecMwh' ? t.tooltipLec : t.tooltipPlant,
                 ]}
               />
               <Bar dataKey="lecMwh" stackId="a" fill="#ff8a45" radius={[0, 0, 0, 0]} />

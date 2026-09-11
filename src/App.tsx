@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import { CpuBusBackground } from './components/CpuBusBackground'
 import { HexCoaster } from './components/HexCoaster'
+import { LanguageToggle } from './components/LanguageToggle'
 import { LecPanel } from './components/LecPanel'
 import { WinterthurMap } from './components/WinterthurMap'
 import { coveragePct, lecByDistrictId, lecs } from './data/lecs'
+import { useLanguage } from './i18n/LanguageContext'
+import { formatTemplate } from './i18n/translations'
 
 export default function App() {
+  const { t } = useLanguage()
   const [districtId, setDistrictId] = useState<string | undefined>()
   const selected = districtId ? lecByDistrictId(districtId) : undefined
 
@@ -16,22 +20,21 @@ export default function App() {
         <div className="brand">
           <span className="brand-mark" aria-hidden="true" />
           <div>
-            <p className="kicker">Winterthur · Lokale Elektrizitätsgemeinschaften</p>
-            <h1>Local Energy Communities</h1>
+            <p className="kicker">{t.brandKicker}</p>
+            <h1>{t.brandTitle}</h1>
           </div>
         </div>
-        <p className="proto">Prototype · all LEC figures are fictional</p>
+        <div className="topbar-actions">
+          <LanguageToggle />
+          <p className="proto">{t.proto}</p>
+        </div>
       </header>
 
       <main>
         <HexCoaster variant="wide" className="hero-coaster">
-          <p className="kicker">Stadtplan der Quartierstrom-Inseln</p>
-          <h2>Click a district to open its energy community</h2>
-          <p>
-            Seven Winterthur Stadtkreise host modelled LECs on the Stadtwerk grid. Outlines follow the official city
-            districts; producer counts, tariffs and hourly traces are invented but sized like a 2026 Swiss LEG —
-            local solar at the LEC tariff while the rest still comes from the plant mix.
-          </p>
+          <p className="kicker">{t.heroKicker}</p>
+          <h2>{t.heroTitle}</h2>
+          <p>{t.heroBody}</p>
         </HexCoaster>
 
         <div className="stage">
@@ -46,7 +49,11 @@ export default function App() {
                   <HexCoaster variant="wide" className="chip-coaster" glow={lec.color}>
                     <span className="chip-name">{lec.shortName}</span>
                     <span className="chip-meta">
-                      {lec.producers} PV · {lec.consumers} loads · {Math.round(coveragePct(lec))}% LEC
+                      {formatTemplate(t.chipMeta, {
+                        producers: lec.producers,
+                        consumers: lec.consumers,
+                        pct: Math.round(coveragePct(lec)),
+                      })}
                     </span>
                   </HexCoaster>
                 </button>

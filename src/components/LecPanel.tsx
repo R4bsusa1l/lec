@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { coveragePct, type Lec, type Season } from '../data/lecs'
+import { useLanguage } from '../i18n/LanguageContext'
+import { formatTemplate } from '../i18n/translations'
 import { Calculator } from './Calculator'
 import { EnergyChart } from './EnergyChart'
 import { HexCoaster } from './HexCoaster'
@@ -10,8 +12,10 @@ type Props = {
 }
 
 export function LecPanel({ lec, onClose }: Props) {
+  const { t } = useLanguage()
   const [season, setSeason] = useState<Season>('summer')
   const coverage = coveragePct(lec)
+  const copy = t.lecs[lec.id]
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -23,60 +27,67 @@ export function LecPanel({ lec, onClose }: Props) {
 
   return (
     <div className="lec-overlay" role="dialog" aria-modal="true" aria-labelledby="lec-title">
-      <button type="button" className="overlay-backdrop" aria-label="Close" onClick={onClose} />
+      <button type="button" className="overlay-backdrop" aria-label={t.closeAria} onClick={onClose} />
       <div className="lec-page">
         <HexCoaster variant="wide" className="lec-hero" glow={lec.color}>
           <header className="lec-head">
             <button type="button" className="close-x" onClick={onClose}>
-              Close
+              {t.close}
             </button>
             <p className="kicker">
-              Kreis {lec.districtId} · {lec.districtName} · {lec.transformer}
+              {formatTemplate(t.districtLabel, {
+                id: lec.districtId,
+                name: lec.districtName,
+                transformer: lec.transformer,
+              })}
             </p>
             <h2 id="lec-title">{lec.name}</h2>
-            <p className="lede">{lec.description}</p>
+            <p className="lede">{copy?.description}</p>
           </header>
         </HexCoaster>
 
         <div className="stat-row">
           <HexCoaster variant="tile" className="stat-tile">
-            <span className="stat-label">Producers</span>
+            <span className="stat-label">{t.producers}</span>
             <strong>{lec.producers}</strong>
-            <em>solar roofs</em>
+            <em>{t.producersUnit}</em>
           </HexCoaster>
           <HexCoaster variant="tile" className="stat-tile">
-            <span className="stat-label">Consumers</span>
+            <span className="stat-label">{t.consumers}</span>
             <strong>{lec.consumers}</strong>
-            <em>meters</em>
+            <em>{t.consumersUnit}</em>
           </HexCoaster>
           <HexCoaster variant="tile" className="stat-tile">
-            <span className="stat-label">PV fleet</span>
+            <span className="stat-label">{t.pvFleet}</span>
             <strong>{lec.installedKwp}</strong>
             <em>kWp</em>
           </HexCoaster>
           <HexCoaster variant="tile" className="stat-tile">
-            <span className="stat-label">LEC coverage</span>
+            <span className="stat-label">{t.lecCoverage}</span>
             <strong>{Math.round(coverage)}%</strong>
-            <em>of yearly demand</em>
+            <em>{t.coverageUnit}</em>
           </HexCoaster>
         </div>
 
         <HexCoaster variant="wide" className="lec-charts">
           <div className="tariff-line">
-            <span>LEC tariff {lec.lecTariffRp.toFixed(1)} Rp/kWh</span>
-            <span>Grid {lec.gridTariffRp.toFixed(1)} Rp/kWh</span>
-            <span>Feed-in {lec.feedInRp.toFixed(1)} Rp/kWh</span>
-            <span>Founded {lec.founded}</span>
+            <span>{formatTemplate(t.lecTariff, { value: lec.lecTariffRp.toFixed(1) })}</span>
+            <span>{formatTemplate(t.gridTariff, { value: lec.gridTariffRp.toFixed(1) })}</span>
+            <span>{formatTemplate(t.feedIn, { value: lec.feedInRp.toFixed(1) })}</span>
+            <span>{formatTemplate(t.founded, { value: copy?.founded ?? '' })}</span>
             <span>
-              {lec.annualProductionMwh} MWh produced · {lec.annualDemandMwh} MWh demanded
+              {formatTemplate(t.energyBalance, {
+                produced: lec.annualProductionMwh,
+                demanded: lec.annualDemandMwh,
+              })}
             </span>
           </div>
           <div className="season-toggle">
             <button type="button" className={season === 'summer' ? 'on' : ''} onClick={() => setSeason('summer')}>
-              Summer day
+              {t.summerDay}
             </button>
             <button type="button" className={season === 'winter' ? 'on' : ''} onClick={() => setSeason('winter')}>
-              Winter day
+              {t.winterDay}
             </button>
           </div>
           <EnergyChart lec={lec} season={season} />
@@ -84,11 +95,8 @@ export function LecPanel({ lec, onClose }: Props) {
 
         <HexCoaster variant="wide" className="lec-calc">
           <section className="calc-section">
-            <h3>Join calculator</h3>
-            <p className="chart-note">
-              Test whether this LEC still has spare solar for a new consumer, or spare demand for a new producer.
-              Figures are modelled, not metered.
-            </p>
+            <h3>{t.joinCalculator}</h3>
+            <p className="chart-note">{t.joinNote}</p>
             <Calculator lec={lec} />
           </section>
         </HexCoaster>

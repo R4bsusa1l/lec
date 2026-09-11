@@ -24,7 +24,6 @@ export type Lec = {
   districtName: string
   name: string
   shortName: string
-  founded: string
   transformer: string
   mix: LoadMix
   producers: number
@@ -35,17 +34,23 @@ export type Lec = {
   lecTariffRp: number
   gridTariffRp: number
   feedInRp: number
-  description: string
   color: string
 }
 
 export type JoinVerdict = 'strong' | 'moderate' | 'weak'
 
+export type JoinMessageId =
+  | 'consumerStrong'
+  | 'consumerModerate'
+  | 'consumerWeak'
+  | 'producerStrong'
+  | 'producerModerate'
+  | 'producerWeak'
+
 export type CalculatorResult = {
   role: Role
   verdict: JoinVerdict
-  headline: string
-  detail: string
+  messageId: JoinMessageId
   coveragePct: number
   offtakePct: number
   supplyKwh: number
@@ -141,47 +146,59 @@ export function evaluateJoin(lec: Lec, role: Role, annualKwh: number): Calculato
   const coveragePctValue = newDemandKwh === 0 ? 0 : (localPool / newDemandKwh) * 100
   const offtakePct = newSupplyKwh === 0 ? 0 : (localPool / newSupplyKwh) * 100
   const localKwh = role === 'consumer' ? userKwh * (coveragePctValue / 100) : userKwh * (offtakePct / 100)
-  const plantKwh = role === 'consumer' ? userKwh - localKwh : userKwh - localKwh
+  const plantKwh = userKwh - localKwh
   const tightness = supplyKwh / Math.max(1, demandKwh)
   const saturated = supplyKwh >= demandKwh
 
   if (role === 'consumer') {
     let verdict: JoinVerdict = 'strong'
-    let headline = 'Local supply can cover a useful share of your demand'
-    let detail = `About ${Math.round(coveragePctValue)}% of your electricity would be billed at the LEC tariff. The rest still comes from the public grid / power plants.`
+    let messageId: JoinMessageId = 'consumerStrong'
     if (tightness < 0.72 || coveragePctValue < 38) {
       verdict = 'weak'
-      headline = 'Supply is low — joining as a consumer is not beneficial'
-      detail = `This community already has ${lec.producers} solar producer${lec.producers === 1 ? '' : 's'} serving ${lec.consumers} consumers. Extra demand would mostly be met by power-plant electricity, so the LEC tariff barely applies.`
+      messageId = 'consumerWeak'
     } else if (tightness < 0.95 || coveragePctValue < 50) {
       verdict = 'moderate'
-      headline = 'Tight supply — only a modest LEC share for new consumers'
-      detail = `Producers are already stretched. You would still import most kilowatt-hours from the grid. A smaller household or a winter-lean profile would see even less LEC coverage.`
+      messageId = 'consumerModerate'
     }
     return {
-      role, verdict, headline, detail,
-      coveragePct: coveragePctValue, offtakePct,
-      supplyKwh, demandKwh, userKwh, newSupplyKwh, newDemandKwh, localKwh, plantKwh,
+      role,
+      verdict,
+      messageId,
+      coveragePct: coveragePctValue,
+      offtakePct,
+      supplyKwh,
+      demandKwh,
+      userKwh,
+      newSupplyKwh,
+      newDemandKwh,
+      localKwh,
+      plantKwh,
     }
   }
 
   let verdict: JoinVerdict = 'weak'
-  let headline = 'Local demand is already saturated'
-  let detail = 'Most of your surplus would still be sold to the grid at the feed-in tariff. This LEC does not currently need another producer.'
+  let messageId: JoinMessageId = 'producerWeak'
   if (!saturated && (tightness < 0.75 || offtakePct > 58)) {
     verdict = 'strong'
-    headline = 'Demand far outweighs supply — producers are needed'
-    detail = `A high share of the power you offer (~${Math.round(offtakePct)}%) could be taken up inside the LEC instead of cheap feed-in. Neighbours currently import a lot of plant electricity during the day.`
+    messageId = 'producerStrong'
   } else if (!saturated && (tightness < 0.98 || offtakePct > 48)) {
     verdict = 'moderate'
-    headline = 'There is still room for additional solar'
-    detail = `Part of your generation would stay in the community (~${Math.round(offtakePct)}% offtake). Midday peaks may still spill to the grid in summer.`
+    messageId = 'producerModerate'
   }
 
   return {
-    role, verdict, headline, detail,
-    coveragePct: coveragePctValue, offtakePct,
-    supplyKwh, demandKwh, userKwh, newSupplyKwh, newDemandKwh, localKwh, plantKwh,
+    role,
+    verdict,
+    messageId,
+    coveragePct: coveragePctValue,
+    offtakePct,
+    supplyKwh,
+    demandKwh,
+    userKwh,
+    newSupplyKwh,
+    newDemandKwh,
+    localKwh,
+    plantKwh,
   }
 }
 
@@ -192,7 +209,6 @@ export const lecs: Lec[] = [
     districtName: 'Winterthur-Stadt',
     name: 'LEC Neuwiesen–Altstadt',
     shortName: 'Neuwiesen',
-    founded: 'March 2026',
     transformer: 'TS Neuwiesen',
     mix: 'urban',
     producers: 16,
@@ -204,8 +220,6 @@ export const lecs: Lec[] = [
     gridTariffRp: 29.4,
     feedInRp: 8.1,
     color: '#ff7a45',
-    description:
-      'A dense inner-city community around the station quarter and the old town. Heritage roofs and shading from taller blocks keep solar scarce, while offices, shops and apartments pull a heavy daytime and evening load. Stadtwerk Winterthur still supplies the residual from the regional mix — including the NOK run-of-river plants on the Rhine and seasonal imports.',
   },
   {
     id: 'hegi',
@@ -213,7 +227,6 @@ export const lecs: Lec[] = [
     districtName: 'Oberwinterthur',
     name: 'LEC Hegi–Grüze',
     shortName: 'Hegi',
-    founded: 'January 2026',
     transformer: 'TS Hegi / TS Grüze',
     mix: 'mixed',
     producers: 47,
@@ -225,8 +238,6 @@ export const lecs: Lec[] = [
     gridTariffRp: 29.4,
     feedInRp: 8.1,
     color: '#ff9a4a',
-    description:
-      'Hall roofs along the Grüze industrial belt and new housing at Hegi give this LEC one of the strongest PV fleets in the city. Midday surplus is common from April to August; winter evenings still lean on the grid. A fictional cooperative, Quartierstrom Oberi, coordinates allocation every 15 minutes.',
   },
   {
     id: 'seen',
@@ -234,7 +245,6 @@ export const lecs: Lec[] = [
     districtName: 'Seen',
     name: 'LEC Seen–Iberg',
     shortName: 'Seen',
-    founded: 'May 2026',
     transformer: 'TS Seen-Dorf',
     mix: 'residential',
     producers: 11,
@@ -246,8 +256,6 @@ export const lecs: Lec[] = [
     gridTariffRp: 29.4,
     feedInRp: 8.1,
     color: '#ff5c7a',
-    description:
-      'Mostly single-family streets toward Eidberg and Iberg, with only a handful of larger south roofs. Evening peaks from heat pumps and cooking dwarf the available solar, so members still buy the majority of their kilowatt-hours at the standard Stadtwerk tariff.',
   },
   {
     id: 'toess',
@@ -255,7 +263,6 @@ export const lecs: Lec[] = [
     districtName: 'Töss',
     name: 'LEC Tösswerk',
     shortName: 'Töss',
-    founded: 'February 2026',
     transformer: 'TS Töss-Zentrum',
     mix: 'mixed',
     producers: 29,
@@ -267,8 +274,6 @@ export const lecs: Lec[] = [
     gridTariffRp: 29.4,
     feedInRp: 8.1,
     color: '#ff6b3c',
-    description:
-      'Named after the old spinning mill, this community sits on former industrial roofs plus the residential fabric toward Dättnau. Production and demand are unusually close over the year, which makes the LEC tariff apply for a large slice of daytime consumption — and leaves only a modest gap for extra producers.',
   },
   {
     id: 'rosenberg',
@@ -276,7 +281,6 @@ export const lecs: Lec[] = [
     districtName: 'Veltheim',
     name: 'LEC Rosenberg',
     shortName: 'Veltheim',
-    founded: 'June 2026',
     transformer: 'TS Veltheim',
     mix: 'residential',
     producers: 1,
@@ -288,8 +292,6 @@ export const lecs: Lec[] = [
     gridTariffRp: 29.4,
     feedInRp: 8.1,
     color: '#ff4d88',
-    description:
-      'A tiny hillside community: one farmhouse array on Rosenbergstrasse and eight neighbouring households. Demand already outruns the single producer. Extra consumers would see almost no LEC electricity; a second roof would sell most of its surplus inside the group instead of at feed-in.',
   },
   {
     id: 'auen',
@@ -297,7 +299,6 @@ export const lecs: Lec[] = [
     districtName: 'Wülflingen',
     name: 'LEC Wülflingen–Auen',
     shortName: 'Wülflingen',
-    founded: 'April 2026',
     transformer: 'TS Wülflingen',
     mix: 'residential',
     producers: 18,
@@ -309,8 +310,6 @@ export const lecs: Lec[] = [
     gridTariffRp: 29.4,
     feedInRp: 8.1,
     color: '#ff7a62',
-    description:
-      'Village-scale streets between the Töss river meadows and the vineyards. Roof potential is decent but not dense, and several heat-pump retrofits from 2023–2025 lifted winter demand. The LEC covers a fair spring–autumn lunch window and little of the evening peak.',
   },
   {
     id: 'gutschick',
@@ -318,7 +317,6 @@ export const lecs: Lec[] = [
     districtName: 'Mattenbach',
     name: 'LEC Gutschick–Deutweg',
     shortName: 'Mattenbach',
-    founded: 'March 2026',
     transformer: 'TS Deutweg',
     mix: 'mixed',
     producers: 22,
@@ -330,8 +328,6 @@ export const lecs: Lec[] = [
     gridTariffRp: 29.4,
     feedInRp: 8.1,
     color: '#ff5a55',
-    description:
-      'School halls, the Deutweg ice-sport roof (modelled as a 90 kWp array) and apartment blocks around Gutschick. Daytime load from public buildings soaks up a useful share of solar; nights and event evenings fall back to the plant mix.',
   },
 ]
 
